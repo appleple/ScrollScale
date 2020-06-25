@@ -24,6 +24,7 @@
 }
 
 .ScrollScale .contants div.active.visible {   /* contants中のactiveなdivがvisibleになったとき適用される */
+    opacity: 1;
 }
 
 .ScrollScale video {
@@ -84,6 +85,10 @@
     }
     
     .ScrollScale .contants div.active.visible {   /* contants中のactiveなdivがvisibleになったとき適用される */
+<<<<<<< HEAD
+=======
+        opacity: 1;
+>>>>>>> d47a373bbb34176b87f416b505a234fc7feee96d
     }
     
     .ScrollScale video {
