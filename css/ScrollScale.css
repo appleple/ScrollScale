@@ -24,7 +24,6 @@
 }
 
 .ScrollScale .contants div.active.visible {   /* contants中のactiveなdivがvisibleになったとき適用される */
-    opacity: 1;
 }
 
 .ScrollScale video {
