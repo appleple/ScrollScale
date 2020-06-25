@@ -1,0 +1,65 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+
+h2{
+    font-size: 30px;
+    margin-top: 150px;
+}
+
+p {
+	font-size: 30px;
+	margin-bottom: 300px;
+}
+
+body {
+	text-align: center;
+	margin:0;
+	padding:0;
+}
+
+.ScrollScale .contants span {
+    color: aliceblue;
+    font-size: 25px;
+}
+
+.ScrollScale .contants h3 {
+    color: aliceblue;
+    font-size: 50px;
+}
+
+.ScrollScale .contants {
+    text-align: left;                      
+}
+
+.ScrollScale .contants p {
+    color: aliceblue;
+}
+
+.ScrollScale .contants h2 {
+    color: aliceblue;
+}
+
+@media (max-width: 767px) {
+    h2{
+        font-size: medium;
+    }
+
+    p {
+        font-size: medium;
+    }
+
+    body {
+        text-align: center;
+        margin:0;
+        padding:0;
+    }
+
+    .ScrollScale .contants span {
+        color: aliceblue;
+        font-size: medium;
+    }
+
+    .ScrollScale .contants h3 {
+        color: aliceblue;
+        font-size: medium;
+    }
+}

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="ScrollScale">
+	<meta name="viewport" content="width=device-width">
+	<title>ScrollScale</title>
+	<link rel="stylesheet" media="all" href="css/style.css">
+
+	<!-- 読み込み -->
+	<link rel="stylesheet" href="css/ScrollScale.css">
+	<script src="js/ScrollScale.js"></script>
+</head>
+
+<!-- ScrollScale----------------------------------------------------------------------------------------------------------------------------------------- -->
+<body>
+	<section>
+		<header>
+			<h2><span>js</span></h2>
+			<p>画像の大きさ普通・アニメーションありバージョン</p>
+		</header>
+
+		<div class="ScrollScale" id="ScrollScale1">
+			<video src="video/sample.mp4" muted="muted" loop playsinline poster="images/sample.png"></video>
+			<div class="contants">
+				<div class="screen-first">
+					<h3>キャッチコピーのみを<br>1画面で表示する</h3>
+				</div>
+				<div class="screen-sencod">
+					<h3>ボタンがあるような</h3>
+					<span>サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。</span>
+					<a href="#">ボタン画像？</a>
+				</div>
+				<div class="screen-first">
+					<h3>コンテンツはdivタブで囲んで<br>いくつでも追加できます</h3>
+				</div>
+			</div>
+		</div>
+		<header>
+			<h2><span>ScrollScale.js(2つめ)</span></h2>
+			<p>画像の大きさ大・アニメーションありバージョン</p>
+		</header>
+		<div class="ScrollScale" id="ScrollScale2">
+			<video src="video/sample.mp4" muted="muted" loop playsinline poster="images/sample.png"></video>
+		<div class="contants">
+			<div class="screen-first">
+				<h3>キャッチコピーのみを<br>1画面で表示する</h3>
+			</div>
+			<div class="screen-sencod">
+				<h3>ボタンがあるような</h3>
+				<span>サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。</span>
+				<a href="#">ボタン画像？</a>
+			</div>
+			<div class="screen-first">
+				<h3>コンテンツはdivタブで囲んで<br>いくつでも追加できます</h3>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<h2><span>ScrollScale.js(3つめ)</span></h2>
+		<p>画像の大きさ小・アニメーションなしバージョン</p>
+	</header>
+	<div class="ScrollScale" id="ScrollScale3">
+		<video src="video/sample.mp4" muted="muted" loop playsinline poster="images/sample.png"></video>
+		<div class="contants">
+			<div class="screen-first">
+				<h3>キャッチコピーのみを<br>1画面で表示する</h3>
+			</div>
+			<div class="screen-sencod">
+			<h3>ボタンがあるような</h3>
+				<span>サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。</span>
+				<a href="#">ボタン画像？</a>
+			</div>
+			<div class="screen-first">
+				<h3>コンテンツはdivタブで囲んで<br>いくつでも追加できます</h3>
+			</div>
+		</div>
+	</div>
+<!-- // ScrollScale ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<script>
+// html要素を読み込んだ後に実行される
+window.addEventListener('DOMContentLoaded', function(){
+	new ScrollScale("ScrollScale1");               			// id名を指定してScrollScaleのインスタンスを生成します(idごとにインスタンスを作成する必要があります)
+	new ScrollScale("ScrollScale2",
+	{
+		size : "large",
+	});						 								// optionを指定することも可能です
+	new ScrollScale("ScrollScale3",
+	{
+		size : "small",
+		animation : false,
+	});
+});
+</script>
+
+</body>
+</html>
