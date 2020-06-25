@@ -34,6 +34,9 @@ class ScrollScale {
         this.contants = new SSContants(this.element.getElementsByClassName("contants")[0], this.options); 
         this.status = false;                                                                // 現在の状態を表す値を定義(拡大していたらtrue、拡大していなければfalseを示す)
         this.changeStyle();                                                                 // optionsの値によってstyleを変える
+        if (ISSMARTPHONE==true) {
+            this.options["animation"] = false;
+        }
     }
 
     changeStyle() {
@@ -70,7 +73,9 @@ class ScrollScale {
         if (scalePosition <= windowHeight/2　&& this.status==false) {       // 現在の要素の位置が基準点よりも上で拡大していなかったら
             this.scale_size();                                                    // 要素を拡大
         } else if (scalePosition > windowHeight/2 && this.status==true) {   // 現在の要素の位置が基準点よりも下で拡大していたら
-            this.return_size();                                                   // 要素を縮小
+            if (ISSMARTPHONE==false) {
+                this.return_size();                                                   // 要素を縮小
+            }
         } else if (this.status==true) {                                     // 拡大していたら
             this.contants.visible_children(pageYOffset);                          // contantsについて表示処理を行う
         }
@@ -87,7 +92,9 @@ class ScrollScale {
 
     // 画面がリサイズされたとき
     resize_event() {
-        this.return_size();
+        if (ISSMARTPHONE==false) {
+            this.contants.calculat_size();
+        }
     }
 }
 
@@ -160,6 +167,7 @@ class SSVideo {
 }
 
 // 指定されたvideo要素にoverlayをつけるクラス
+// 現在参照なし
 class SSVideoOverlay {
     constructor(wrapContant) {
         this.wrapContant = wrapContant;
@@ -224,6 +232,7 @@ class SSContants {
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
         const ContantsHeight = this.element.offsetHeight+this.element.getBoundingClientRect().top;
         const parent = this.element.parentNode;                       // 親要素を取り出す
+        console.log(videoHeight, ContantsHeight);
         if (videoHeight > ContantsHeight) {                           // contantTextのheightがcontantVideoより小さかったら
             parent.style["height"] = `${window.innerHeight}px`;           // heightをvideoに合わせる
         } else {                                                      // それ以外
@@ -271,6 +280,7 @@ class SSContant {
         const windowHeight = window.innerHeight;        // 要素のheightを取得
         if (this.options["animation"]==false){
             this.element.classList.add("visible")
+            this.element.style["opacity"] = "1";
             return
         }
         // もしこの要素の基準点が画面上にあったら
