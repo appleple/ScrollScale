@@ -1,6 +1,14 @@
 // body内すべてのScrollScaleを格納する配列
 const SCROLLSCALELIST = [];
-const userAgent = navigator.userAgent;
+let ISSMARTPHONE = false;
+isSmartPhone();
+
+function isSmartPhone() {
+    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+      ISSMARTPHONE = true;
+    }
+}
+
 
 // デフォルトのオプション
 const OPTIONS = {
@@ -296,21 +304,10 @@ window.addEventListener("scroll", function(){
     }
 });
 
+/*
 // windowがリサイズされた場合に実行される
 window.addEventListener("resize", function(){
     for(i=0; i<SCROLLSCALELIST.length; i++) {       // SCROLLSCALELISTの数だけ繰り返す
         SCROLLSCALELIST[i].resize_event();                 // すべてのScrollScaleインスタンスに対してscroll_eventを実行
     }
-});
-
-// モバイルブラウザ、PCブラウザによってrisize_eventの発火点を変える
-if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0)
-    window.addEventListener("orientationchange", resizeHandler);
-else
-    window.addEventListener("resize", resizeHandler);
-
-function resizeHandler() {
-    for(i=0; i<SCROLLSCALELIST.length; i++) {       // SCROLLSCALELISTの数だけ繰り返す
-        SCROLLSCALELIST[i].resize_event();                 // すべてのScrollScaleインスタンスに対してscroll_eventを実行
-    }
-}
+});*/
