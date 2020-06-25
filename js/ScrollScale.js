@@ -70,7 +70,9 @@ class ScrollScale {
         if (scalePosition <= windowHeight/2　&& this.status==false) {       // 現在の要素の位置が基準点よりも上で拡大していなかったら
             this.scale_size();                                                    // 要素を拡大
         } else if (scalePosition > windowHeight/2 && this.status==true) {   // 現在の要素の位置が基準点よりも下で拡大していたら
-            this.return_size();                                                   // 要素を縮小
+            if (ISSMARTPHONE==false) {
+                this.return_size();                                                   // 要素を縮小
+            }
         } else if (this.status==true) {                                     // 拡大していたら
             this.contants.visible_children(pageYOffset);                          // contantsについて表示処理を行う
         }

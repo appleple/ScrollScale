@@ -39,27 +39,27 @@ body {
 }
 
 @media (max-width: 767px) {
-h2{
-	font-size: medium;
-}
+    h2{
+        font-size: medium;
+    }
 
-p {
-	font-size: medium;
-}
+    p {
+        font-size: medium;
+    }
 
-body {
-	text-align: center;
-	margin:0;
-	padding:0;
-}
+    body {
+        text-align: center;
+        margin:0;
+        padding:0;
+    }
 
-.ScrollScale .contants span {
-    color: aliceblue;
-    font-size: medium;
-}
+    .ScrollScale .contants span {
+        color: aliceblue;
+        font-size: medium;
+    }
 
-.ScrollScale .contants h3 {
-    color: aliceblue;
-    font-size: medium;
-}
+    .ScrollScale .contants h3 {
+        color: aliceblue;
+        font-size: medium;
+    }
 }
