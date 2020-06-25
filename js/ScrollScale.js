@@ -93,7 +93,7 @@ class ScrollScale {
     // 画面がリサイズされたとき
     resize_event() {
         if (ISSMARTPHONE==false) {
-            this.contants.calculat_size();
+            this.contants.calculat_size_resize();
         }
     }
 }
@@ -232,12 +232,20 @@ class SSContants {
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
         const ContantsHeight = this.element.offsetHeight+this.element.getBoundingClientRect().top;
         const parent = this.element.parentNode;                       // 親要素を取り出す
-        console.log(videoHeight, ContantsHeight);
         if (videoHeight > ContantsHeight) {                           // contantTextのheightがcontantVideoより小さかったら
             parent.style["height"] = `${window.innerHeight}px`;           // heightをvideoに合わせる
         } else {                                                      // それ以外
             parent.style["height"] = `${ContantsHeight}px`;               // heightをcontantsに合わせる
         }
+    }
+
+    calculat_size_resize() {
+        const videoHeight = window.innerHeight;                       // videoのheight
+        // elementのheightと、elementと画面の相対位置のheightを足す
+        // これによって、拡大した画像がcontants分だけ画面上部に固定される
+        const ContantsHeight = this.element.offsetHeight+window.innerHeight*0.5;
+        const parent = this.element.parentNode;                       // 親要素を取り出す
+        parent.style["height"] = `${ContantsHeight}px`;               // heightをcontantsに合わせる
     }
 }
 
@@ -314,10 +322,10 @@ window.addEventListener("scroll", function(){
     }
 });
 
-/*
+
 // windowがリサイズされた場合に実行される
 window.addEventListener("resize", function(){
     for(i=0; i<SCROLLSCALELIST.length; i++) {       // SCROLLSCALELISTの数だけ繰り返す
         SCROLLSCALELIST[i].resize_event();                 // すべてのScrollScaleインスタンスに対してscroll_eventを実行
     }
-});*/
+});
