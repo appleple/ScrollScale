@@ -279,6 +279,7 @@ class SSContant {
     deactivate() {
         this.element.style["padding-top"] = "0vh";      // 適用した上方向paddingを0に
         this.element.style["padding-bottom"] = "0vh";   // 適用した下方向paddingを0に
+        this.element.style["opacity"] = "0";
         this.element.classList.remove("active");        // この要素のactiveクラスを削除
         this.element.classList.remove("visible");
     }
