@@ -12,19 +12,25 @@
 	<script src="js/ScrollScale.js"></script>
 </head>
 
-<!-- ScrollScale----------------------------------------------------------------------------------------------------------------------------------------- -->
 <body>
-	<section>
-		<header>
-			<h2><span>js</span></h2>
-			<p>画像の大きさ普通・アニメーションありバージョン</p>
-		</header>
+<!-- ScrollScale----------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div id="header">
+		<div class="container">
+			<h1>ScrollScale.js</h1>
+			<p>JavaScript program makes video enlarge when it's in the center of the window.</p>
+			<button onclick="location.href='https://github.com/appleple/ScrollScale'">View on GitHub</button>
+		</div>
+	</div>
 
+	<div class="demo">
+		<h2><span class="under">DEMO</span></h2>
 		<div class="ScrollScale" id="ScrollScale1">
-			<video src="video/sample.mp4" muted="muted" loop playsinline poster="images/sample.png"></video>
+			<video src="video/sample2.mp4" muted="muted" loop playsinline poster="images/sample2.png"></video>
 			<div class="contants">
 				<div class="screen-first">
-					<h3>キャッチコピーのみを<br>1画面で表示する</h3>
+					<h3>印象的なキャッチコピーを<br>1画面で表示する</h3>
+					<p>伝えたいメッセージを画面いっぱいの大きさで表示できます。</p>
+					<p>コンテンツは自動的に画面中央に寄せられます</p>
 				</div>
 				<div class="screen-sencod">
 					<h3>ボタンがあるような</h3>
@@ -36,63 +42,17 @@
 				</div>
 			</div>
 		</div>
-		<header>
-			<h2><span>ScrollScale.js(2つめ)</span></h2>
-			<p>画像の大きさ大・アニメーションありバージョン</p>
-		</header>
-		<div class="ScrollScale" id="ScrollScale2">
-			<video src="video/sample.mp4" muted="muted" loop playsinline poster="images/sample.png"></video>
-		<div class="contants">
-			<div class="screen-first">
-				<h3>キャッチコピーのみを<br>1画面で表示する</h3>
-			</div>
-			<div class="screen-sencod">
-				<h3>ボタンがあるような</h3>
-				<span>サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。</span>
-				<a href="#">ボタン画像？</a>
-			</div>
-			<div class="screen-first">
-				<h3>コンテンツはdivタブで囲んで<br>いくつでも追加できます</h3>
-			</div>
-		</div>
 	</div>
 
-	<header>
-		<h2><span>ScrollScale.js(3つめ)</span></h2>
-		<p>画像の大きさ小・アニメーションなしバージョン</p>
-	</header>
-	<div class="ScrollScale" id="ScrollScale3">
-		<video src="video/sample.mp4" muted="muted" loop playsinline poster="images/sample.png"></video>
-		<div class="contants">
-			<div class="screen-first">
-				<h3>キャッチコピーのみを<br>1画面で表示する</h3>
-			</div>
-			<div class="screen-sencod">
-			<h3>ボタンがあるような</h3>
-				<span>サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。サンプルで適当な文章を用意しておきます。</span>
-				<a href="#">ボタン画像？</a>
-			</div>
-			<div class="screen-first">
-				<h3>コンテンツはdivタブで囲んで<br>いくつでも追加できます</h3>
-			</div>
-		</div>
-	</div>
 <!-- // ScrollScale ----------------------------------------------------------------------------------------------------------------------------------------->
 
 
 <script>
 // html要素を読み込んだ後に実行される
 window.addEventListener('DOMContentLoaded', function(){
-	new ScrollScale("ScrollScale1");               			// id名を指定してScrollScaleのインスタンスを生成します(idごとにインスタンスを作成する必要があります)
-	new ScrollScale("ScrollScale2",
-	{
-		size : "large",
-	});						 								// optionを指定することも可能です
-	new ScrollScale("ScrollScale3",
-	{
+	new ScrollScale("ScrollScale1", {
 		size : "small",
-		animation : false,
-	});
+	});               			// id名を指定してScrollScaleのインスタンスを生成します(idごとにインスタンスを作成する必要があります)
 });
 </script>
 
