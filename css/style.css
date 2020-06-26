@@ -126,6 +126,19 @@ body {
 }
 
 @media (max-width: 767px) {
+    #header h2 {
+        font-size: medium;
+    }
+    #header h1 {
+        font-size: 25px;
+    }
+    #header p {
+        font-size: medium;
+    }
+    #header button {
+        font-size: medium;
+    }
+
     h2{
         font-size: medium;
     }
