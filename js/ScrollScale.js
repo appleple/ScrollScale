@@ -92,7 +92,7 @@ class ScrollScale {
 
     // 画面がリサイズされたとき
     resize_event() {
-        if (ISSMARTPHONE==false) {
+        if (ISSMARTPHONE==false && this.status==true) {
             this.contants.calculat_size_resize();
         }
     }
@@ -240,6 +240,9 @@ class SSContants {
     }
 
     calculat_size_resize() {
+        for (let i=0; i<this.elementChildren.length; i++) {
+            this.elementChildren[i].calculate_height_resize();
+        }
         const videoHeight = window.innerHeight;                       // videoのheight
         // elementのheightと、elementと画面の相対位置のheightを足す
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
@@ -262,14 +265,7 @@ class SSContant {
     // アクティブ化処理
     activate() {
         this.element.classList.add("active");                                   // この要素にactiveクラスを付与
-
-        // 縦方向中心よせ処理
-        const elementHeight = this.element.clientHeight;                        // この要素のheightを取得
-        const windowHeight = window.innerHeight;                                // windowのheightを取得
-        const paddingTop = (1-elementHeight/windowHeight)*100/2;                // この要素を中央に寄せるための上下のpaddingを計算
-        this.element.style["padding-top"] = `${paddingTop}vh`;                  // 上方向paddingを適用
-        this.element.style["padding-bottom"] = `${paddingTop}vh`;               // 下方向paddingを適用
-        // ここまで
+        this.calculate_height();
 
         const top = this.element.getBoundingClientRect().top+window.pageYOffset;// この要素のpaddingを含むページ全体での位置を計算
         this.visible_point = top+this.element.clientHeight/2;                   // この要素が現れるべき基準点を計算(要素中央が基準点)
@@ -311,6 +307,23 @@ class SSContant {
             this.element.classList.remove("visible");       // 要素からvisibleクラスを削除
             this.status = false;                            // ステータスを非表示に
         }
+    }
+
+    // 縦方向中心よせ処理
+    calculate_height() {
+        const elementHeight = this.element.clientHeight;                        // この要素のheightを取得
+        const windowHeight = window.innerHeight;                                // windowのheightを取得
+        const paddingTop = (1-elementHeight/windowHeight)*100/2;                // この要素を中央に寄せるための上下のpaddingを計算
+        console.log(paddingTop);
+        this.element.style["padding-top"] = `${paddingTop}vh`;                  // 上方向paddingを適用
+        this.element.style["padding-bottom"] = `${paddingTop}vh`;               // 下方向paddingを適用
+    }
+
+    calculate_height_resize() {
+        this.calculate_height();
+        
+        const top = this.element.getBoundingClientRect().top+window.pageYOffset;// この要素のpaddingを含むページ全体での位置を計算
+        this.visible_point = top+this.element.clientHeight/2;                   // この要素が現れるべき基準点を計算(要素中央が基準点)
     }
 }
 
