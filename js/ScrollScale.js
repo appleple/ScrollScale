@@ -241,13 +241,23 @@ class SSContants {
     // resize時にcontantのcalculate_height_resizeを呼び出しheightを再計算
     // その後親要素のheightも再計算する
     calculat_size_resize() {
+        // 表示位置を調整するための変数をoptionによって変更
+        let scale_padding = 0.1;
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                scale_padding = 0;
+            } else if (this.options["size"]=="small") {
+                scale_padding = 0.2
+            }
+        }
+
         for (let i=0; i<this.elementChildren.length; i++) {
             this.elementChildren[i].calculate_height_resize();
         }
         const videoHeight = window.innerHeight;                       // videoのheight
         // elementのheightと、elementと画面の相対位置のheightを足す
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
-        const ContantsHeight = this.element.offsetHeight+window.innerHeight*0.5;
+        const ContantsHeight = this.element.offsetHeight+window.innerHeight*0.5-window.innerHeight*scale_padding;
         const parent = this.element.parentNode;                       // 親要素を取り出す
         parent.style["height"] = `${ContantsHeight}px`;               // heightをcontantsに合わせる
     }
