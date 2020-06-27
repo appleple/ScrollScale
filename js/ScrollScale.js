@@ -39,6 +39,7 @@ class ScrollScale {
         this.video.activate();      // videoにアクティブ操作
         this.contants.activate();   // contantsにアクティブ操作
         this.status = true;         // statusをtrueに
+        this.element.style.paddingBottom = 0;   // 表示位置を調整するためpaddingbottomを0に
     }
 
     // videoを元の大きさに戻す
@@ -47,6 +48,17 @@ class ScrollScale {
         this.contants.deactivate();             // contantsにディアクティブ操作
         this.element.style["height"] = "auto";  // ScrollScaleのheightをautoに戻す
         this.status = false;                    // statusをfalseに
+
+        // 0にしたpaddingBottomをもとに戻す
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                this.element.style["padding-bottom"] = "0";
+            } else if (this.options["size"]=="small") {
+                this.element.style["padding-bottom"] = "20vh";
+            }
+        } else {
+            this.element.style["padding-bottom"] = "10vh";
+        }
     }
 
     // 入力(現在の画面の高さ)によってvideoを拡大するかしないか判断する
@@ -205,10 +217,19 @@ class SSContants {
 
     // contantsのheightを計算する：この処理は必ず子要素全てをアクティブ化してから行う(子要素の大きさを取得できないため)
     calculat_size() {
+        // 表示位置を調整するための変数をoptionによって変更
+        let scale_padding = 0.1;
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                scale_padding = 0;
+            } else if (this.options["size"]=="small") {
+                scale_padding = 0.2
+            }
+        }
         const videoHeight = window.innerHeight;                       // videoのheight
         // elementのheightと、elementと画面の相対位置のheightを足す
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
-        const ContantsHeight = this.element.offsetHeight+this.element.getBoundingClientRect().top;
+        const ContantsHeight = this.element.offsetHeight+this.element.getBoundingClientRect().top-window.innerHeight*scale_padding;
         const parent = this.element.parentNode;                       // 親要素を取り出す
         if (videoHeight > ContantsHeight) {                           // contantTextのheightがcontantVideoより小さかったら
             parent.style["height"] = `${window.innerHeight}px`;           // heightをvideoに合わせる

@@ -27,7 +27,7 @@
 }
 
 .ScrollScale video {
-    transition: all 3z00ms 0s ease;      /* 変化にアニメーションを付与 */                /* 変更可能要素 */
+    transition: all 400ms 0s ease;      /* 変化にアニメーションを付与 */                /* 変更可能要素 */
     width: 80%;                         /* 親要素に対して80% */
     height: 80vh;                       /* 画面に対して80vh */
 	object-fit: cover;                  /* object-fit:cover */                      /* 変更可能要素 */
