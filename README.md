@@ -1,20 +1,20 @@
 # ScrollScale
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/appleple/SmartPhoto/master/LICENSE)
 
-JavaScript program makes video enlarge when it appeares in the center of the window.
+JavaScript program makes video enlarge and show the catchphrases when it's in the center of the window.
 
 ## Requirements
 + ES6
 + CSS3
 
 ## Usage
-Install javascript and css program.
+JavaScript program makes video enlarge when it's in the center of the window.
 ```html
 <script src="js/ScrollScale.js"></script>
 <link rel="stylesheet" href="css/ScrollScale.css">
 ```
 
-Wrap video you want to enlarge with ScrollScale class.
+Wrap video and messages you want to enlarge with ScrollScale class.
 ```html
 <div class="ScrollScale">
   <video src=""/>
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 ```
 
-You can create some contants layer on the video to place these between div of contants class.
+You can create some contants layer on the video.
 ```html
 <div class="ScrollScale">
   <video src=""/>

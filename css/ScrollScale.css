@@ -11,8 +11,8 @@
     display: none;                      /* 動画が拡大していない場合は非表示 */
     position: absolute;                 /* ScrollScaleに対する絶対位置に */
     top: 50vh;                          /* topを調整することによって最初の要素の開始点を下に寄せる */
-    padding-left: 10vh;                 /* 左にpaddingをつけることによって子要素を中央よりに表示 */
-    padding-right: 10vh;
+    padding-left: 10vw;                 /* 左にpaddingをつけることによって子要素を中央よりに表示 */
+    padding-right: 10vw;
 }
 
 .ScrollScale .contants.active {         /* contantsがactiveになったとき適用される */
