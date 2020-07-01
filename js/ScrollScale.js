@@ -50,6 +50,7 @@ class ScrollScale {
         this.status = false;                    // statusをfalseに
 
         // 0にしたpaddingBottomをもとに戻す
+        /*
         if (this.options["size"]!="middle") {                                               
             if (this.options["size"]=="large") {
                 this.element.style["padding-bottom"] = "0";
@@ -58,7 +59,7 @@ class ScrollScale {
             }
         } else {
             this.element.style["padding-bottom"] = "10vh";
-        }
+        }*/
     }
 
     // 入力(現在の画面の高さ)によってvideoを拡大するかしないか判断する
