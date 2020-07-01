@@ -39,7 +39,7 @@ class ScrollScale {
         this.video.activate();      // videoにアクティブ操作
         this.contants.activate();   // contantsにアクティブ操作
         this.status = true;         // statusをtrueに
-        this.element.style.paddingBottom = 0;   // 表示位置を調整するためpaddingbottomを0に
+        //this.element.style.paddingBottom = 0;   // 表示位置を調整するためpaddingbottomを0に // 被ってしまう
     }
 
     // videoを元の大きさに戻す
