@@ -1,14 +1,12 @@
 // body内すべてのScrollScaleを格納する配列
 const SCROLLSCALELIST = [];
+
+// 端末がスマートフォンかどうか保存する変数
 let ISSMARTPHONE = false;
-isSmartPhone();
 
-function isSmartPhone() {
-    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-      ISSMARTPHONE = true;
-    }
+if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {  // もしスマートフォンなら
+    ISSMARTPHONE = true;                                        // ISSMARTPHONEをtrueに
 }
-
 
 // デフォルトのオプション
 const OPTIONS = {
@@ -28,27 +26,12 @@ class ScrollScale {
         if (options === undefined ? null : options!=null) {                                 // optionsがnullでなかったら
             this.check_options(options)                                                           // option変更点を確認し更新
         }
+        this.changeStyle();                                                                 // optionsの値によってstyleを変える
         // SSVideoのインスタンスを生成
         this.video = new SSVideo(this.element.getElementsByTagName("video")[0], this.options);
         // SSContantsのインスタンスを生成
         this.contants = new SSContants(this.element.getElementsByClassName("contants")[0], this.options); 
         this.status = false;                                                                // 現在の状態を表す値を定義(拡大していたらtrue、拡大していなければfalseを示す)
-        this.changeStyle();                                                                 // optionsの値によってstyleを変える
-        if (ISSMARTPHONE==true) {
-            this.options["animation"] = false;
-        }
-    }
-
-    changeStyle() {
-        if (this.options["size"]!="middle") {
-            if (this.options["size"]=="large") {
-                this.element.style["padding-top"] = "0";
-                this.element.style["padding-bottom"] = "0";
-            } else if (this.options["size"]=="small") {
-                this.element.style["padding-top"] = "20vh";
-                this.element.style["padding-bottom"] = "20vh";
-            }
-        }
     }
 
     // videoを拡大し全画面に
@@ -56,6 +39,7 @@ class ScrollScale {
         this.video.activate();      // videoにアクティブ操作
         this.contants.activate();   // contantsにアクティブ操作
         this.status = true;         // statusをtrueに
+        //this.element.style.paddingBottom = 0;   // 表示位置を調整するためpaddingbottomを0に // 被ってしまう
     }
 
     // videoを元の大きさに戻す
@@ -64,6 +48,18 @@ class ScrollScale {
         this.contants.deactivate();             // contantsにディアクティブ操作
         this.element.style["height"] = "auto";  // ScrollScaleのheightをautoに戻す
         this.status = false;                    // statusをfalseに
+
+        // 0にしたpaddingBottomをもとに戻す
+        /*
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                this.element.style["padding-bottom"] = "0";
+            } else if (this.options["size"]=="small") {
+                this.element.style["padding-bottom"] = "20vh";
+            }
+        } else {
+            this.element.style["padding-bottom"] = "10vh";
+        }*/
     }
 
     // 入力(現在の画面の高さ)によってvideoを拡大するかしないか判断する
@@ -73,7 +69,7 @@ class ScrollScale {
         if (scalePosition <= windowHeight/2　&& this.status==false) {       // 現在の要素の位置が基準点よりも上で拡大していなかったら
             this.scale_size();                                                    // 要素を拡大
         } else if (scalePosition > windowHeight/2 && this.status==true) {   // 現在の要素の位置が基準点よりも下で拡大していたら
-            if (ISSMARTPHONE==false) {
+            if (ISSMARTPHONE==false) {                                            // スマートフォンでなければ
                 this.return_size();                                                   // 要素を縮小
             }
         } else if (this.status==true) {                                     // 拡大していたら
@@ -92,8 +88,25 @@ class ScrollScale {
 
     // 画面がリサイズされたとき
     resize_event() {
-        if (ISSMARTPHONE==false) {
-            this.contants.calculat_size_resize();
+        if (ISSMARTPHONE==false && this.status==true) {     // スマートフォンで無く、拡大中の動画であれば
+            this.contants.calculat_size_resize();               // contantsのリサイズ処理を行う
+        }
+    }
+
+    // optionsの値によって動画の大きさを変更する
+    // 端末がスマートフォンであれば、animationをfalseにする
+    changeStyle() {
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                this.element.style["padding-top"] = "0";
+                this.element.style["padding-bottom"] = "0";
+            } else if (this.options["size"]=="small") {
+                this.element.style["padding-top"] = "20vh";
+                this.element.style["padding-bottom"] = "20vh";
+            }
+        }
+        if (ISSMARTPHONE==true) {                                                           // 端末がスマートフォンだったら
+            this.options["animation"] = false;                                                    // contantのアニメーションをオフに
         }
     }
 }
@@ -106,19 +119,6 @@ class SSVideo {
         this.element = video;  // videoのDOMを格納
         this.options = options;
         this.changeStyle();    // optionsの値によってスタイルを変更する
-        // this.videoOverlay = new SSVideoOverlay(this.element);
-    }
-
-    changeStyle() {
-        if (this.options["size"]!="middle") {
-            if (this.options["size"]=="large") {
-                this.element.style["width"] = "100%";
-                this.element.style["height"] = "100vh";
-            } else if (this.options["size"]=="small") {
-                this.element.style["width"] = "60%";
-                this.element.style["height"] = "60vh";
-            }
-        }
     }
 
     // アクティブ化処理
@@ -131,8 +131,6 @@ class SSVideo {
                 this.element.style["top"] = "20vh";
             }
         }        
-        //this.element.style["opacity"] = `${this.options["opacity"]}`;                                     //videoにぼかしを掛けようとしたところ
-        //this.videoOverlay.activate();                                                                     //videoにぼかしを掛けようとしたところ
         this.element.play();                    // videoを再生
         this.calculat_size();                   // videoのサイズを変更(全画面表示に)
     }
@@ -164,25 +162,18 @@ class SSVideo {
     calculate_scale_position() {
         return this.element.getBoundingClientRect().top + this.element.clientHeight/2;   // videoの中心点を計算
     }
-}
 
-// 指定されたvideo要素にoverlayをつけるクラス
-// 現在参照なし
-class SSVideoOverlay {
-    constructor(wrapContant) {
-        this.wrapContant = wrapContant;
-        this.wrapContant.parentNode.insertAdjacentHTML("afterbegin", `<div class=\"overlay\" style=\"width: ${this.wrapContant.clientWidth}px; height: calc(${this.wrapContant.clientHeight} - 20vh);\"></div>`);
-        this.element = this.wrapContant.parentNode.getElementsByClassName("overlay")[0];
-    }
-
-    activate() {
-        this.element.style["left"] = `${this.wrapContant.getBoundingClientRect().left}px`;
-        this.element.style["top"] = `${this.wrapContant.getBoundingClientRect().top}px`;
-        this.element.classList.add("active");
-    }
-
-    deactivate() {
-        this.element.classList.remove("active");
+    // optionsの値によってスタイルを変更する
+    changeStyle() {
+        if (this.options["size"]!="middle") {
+            if (this.options["size"]=="large") {
+                this.element.style["width"] = "100%";
+                this.element.style["height"] = "100vh";
+            } else if (this.options["size"]=="small") {
+                this.element.style["width"] = "60%";
+                this.element.style["height"] = "60vh";
+            }
+        }
     }
 }
 
@@ -192,7 +183,7 @@ class SSContants {
     // 引数はcontantsのDOM, option情報
     constructor(contants, options) {
         this.element = contants;                                                // contantsのDOMを格納
-        this.options = options;
+        this.options = options;                                                 // optionsを格納する変数
         this.elementChildren = [];                                              // contants内の子要素を格納する配列
         for (let i=0; i<this.element.children.length; i++) {                    // 子要素の数繰り返す
             // SSContantのインスタンスを生成し配列に格納
@@ -227,10 +218,19 @@ class SSContants {
 
     // contantsのheightを計算する：この処理は必ず子要素全てをアクティブ化してから行う(子要素の大きさを取得できないため)
     calculat_size() {
+        // 表示位置を調整するための変数をoptionによって変更
+        let scale_padding = 0.1;
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                scale_padding = 0;
+            } else if (this.options["size"]=="small") {
+                scale_padding = 0.2
+            }
+        }
         const videoHeight = window.innerHeight;                       // videoのheight
         // elementのheightと、elementと画面の相対位置のheightを足す
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
-        const ContantsHeight = this.element.offsetHeight+this.element.getBoundingClientRect().top;
+        const ContantsHeight = this.element.offsetHeight+this.element.getBoundingClientRect().top-window.innerHeight*scale_padding;
         const parent = this.element.parentNode;                       // 親要素を取り出す
         if (videoHeight > ContantsHeight) {                           // contantTextのheightがcontantVideoより小さかったら
             parent.style["height"] = `${window.innerHeight}px`;           // heightをvideoに合わせる
@@ -239,11 +239,26 @@ class SSContants {
         }
     }
 
+    // resize時にcontantのcalculate_height_resizeを呼び出しheightを再計算
+    // その後親要素のheightも再計算する
     calculat_size_resize() {
+        // 表示位置を調整するための変数をoptionによって変更
+        let scale_padding = 0.1;
+        if (this.options["size"]!="middle") {                                               
+            if (this.options["size"]=="large") {
+                scale_padding = 0;
+            } else if (this.options["size"]=="small") {
+                scale_padding = 0.2
+            }
+        }
+
+        for (let i=0; i<this.elementChildren.length; i++) {
+            this.elementChildren[i].calculate_height_resize();
+        }
         const videoHeight = window.innerHeight;                       // videoのheight
         // elementのheightと、elementと画面の相対位置のheightを足す
         // これによって、拡大した画像がcontants分だけ画面上部に固定される
-        const ContantsHeight = this.element.offsetHeight+window.innerHeight*0.5;
+        const ContantsHeight = this.element.offsetHeight+window.innerHeight*0.5-window.innerHeight*scale_padding;
         const parent = this.element.parentNode;                       // 親要素を取り出す
         parent.style["height"] = `${ContantsHeight}px`;               // heightをcontantsに合わせる
     }
@@ -255,22 +270,14 @@ class SSContant {
     // 引数はcontantsの1つの子要素
     constructor(contant, options) {
         this.element = contant;   // contantsの子要素のDOMを格納
-        this.options = options;   
+        this.options = options;   // optionsを格納する
         this.status = false;      // この要素が現在表示されているかどうかを表す値
     }
 
     // アクティブ化処理
     activate() {
         this.element.classList.add("active");                                   // この要素にactiveクラスを付与
-
-        // 縦方向中心よせ処理
-        const elementHeight = this.element.clientHeight;                        // この要素のheightを取得
-        const windowHeight = window.innerHeight;                                // windowのheightを取得
-        const paddingTop = (1-elementHeight/windowHeight)*100/2;                // この要素を中央に寄せるための上下のpaddingを計算
-        this.element.style["padding-top"] = `${paddingTop}vh`;                  // 上方向paddingを適用
-        this.element.style["padding-bottom"] = `${paddingTop}vh`;               // 下方向paddingを適用
-        // ここまで
-
+        this.calculate_height();                                                // この要素のheightから上下のpaddingを計算する関数
         const top = this.element.getBoundingClientRect().top+window.pageYOffset;// この要素のpaddingを含むページ全体での位置を計算
         this.visible_point = top+this.element.clientHeight/2;                   // この要素が現れるべき基準点を計算(要素中央が基準点)
     }
@@ -279,16 +286,17 @@ class SSContant {
     deactivate() {
         this.element.style["padding-top"] = "0vh";      // 適用した上方向paddingを0に
         this.element.style["padding-bottom"] = "0vh";   // 適用した下方向paddingを0に
+        this.element.style["opacity"] = "0";            // 非表示に
         this.element.classList.remove("active");        // この要素のactiveクラスを削除
-        this.element.classList.remove("visible");
+        this.element.classList.remove("visible");       // この要素のvisibleクラスを削除
     }
 
     // pageYOffsetの値によってcontantのアニメーションを決定する
     position_check(pageYOffset) {
         const windowHeight = window.innerHeight;        // 要素のheightを取得
-        if (this.options["animation"]==false){
-            this.element.classList.add("visible")
-            this.element.style["opacity"] = "1";
+        if (this.options["animation"]==false){          // もしanimationがfalseだったら
+            this.element.classList.add("visible")           // この要素にvisibleクラスを付与
+            this.element.style["opacity"] = "1";        // 要素を表示
             return
         }
         // もしこの要素の基準点が画面上にあったら
@@ -310,6 +318,22 @@ class SSContant {
             this.element.classList.remove("visible");       // 要素からvisibleクラスを削除
             this.status = false;                            // ステータスを非表示に
         }
+    }
+
+    // この要素のheightから上下のpaddingを決定する
+    calculate_height() {
+        const elementHeight = this.element.clientHeight;                        // この要素のheightを取得
+        const windowHeight = window.innerHeight;                                // windowのheightを取得
+        const paddingTop = (1-elementHeight/windowHeight)*100/2;                // この要素を中央に寄せるための上下のpaddingを計算
+        this.element.style["padding-top"] = `${paddingTop}vh`;                  // 上方向paddingを適用
+        this.element.style["padding-bottom"] = `${paddingTop}vh`;               // 下方向paddingを適用
+    }
+
+    // この要素の上下のpaddingと可視化基準点を再計算する
+    calculate_height_resize() {
+        this.calculate_height();
+        const top = this.element.getBoundingClientRect().top+window.pageYOffset;// この要素のpaddingを含むページ全体での位置を計算
+        this.visible_point = top+this.element.clientHeight/2;                   // この要素が現れるべき基準点を計算(要素中央が基準点)
     }
 }
 

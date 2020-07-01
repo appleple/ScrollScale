@@ -11,8 +11,8 @@
     display: none;                      /* 動画が拡大していない場合は非表示 */
     position: absolute;                 /* ScrollScaleに対する絶対位置に */
     top: 50vh;                          /* topを調整することによって最初の要素の開始点を下に寄せる */
-    padding-left: 10vh;                 /* 左にpaddingをつけることによって子要素を中央よりに表示 */
-    padding-right: 10vh;
+    padding-left: 10vw;                 /* 左にpaddingをつけることによって子要素を中央よりに表示 */
+    padding-right: 10vw;
 }
 
 .ScrollScale .contants.active {         /* contantsがactiveになったとき適用される */
@@ -27,7 +27,7 @@
 }
 
 .ScrollScale video {
-    transition: all 500ms 0s ease;      /* 変化にアニメーションを付与 */                /* 変更可能要素 */
+    transition: all 400ms 0s ease;      /* 変化にアニメーションを付与 */                /* 変更可能要素 */
     width: 80%;                         /* 親要素に対して80% */
     height: 80vh;                       /* 画面に対して80vh */
 	object-fit: cover;                  /* object-fit:cover */                      /* 変更可能要素 */
@@ -39,65 +39,4 @@
     top: 10vh;                          /* 固定位置はtop=10vh(padding分) */
     z-index: -1;                        /* z-index=-1 */
     opacity: 0.9;                       /* opacity変更によって文字を見やすくする */
-}
-
-.overlay {
-    transition: all 500ms 0s ease;      /* 変化にアニメーションを付与 */                /* 変更可能要素 */
-}
-
-.overlay.active {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-image: linear-gradient(45deg, rgba(0,0,0,.3) 50%, rgba(0,0,0,.7) 50%);
-    background-size: 4px 4px;
-    z-index: -1;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@media (max-width: 767px) {
-    .ScrollScale {                          /* ScrollScaleに適用される */
-        position: relative;                 /* contantsをvideo内に表示するため */
-        width: 100%;                        /* 親要素に対して100%に */
-        padding-top: 10vh;                  /* 上に10vh */
-        padding-bottom: 10vh;               /* 下に10vh とることで縦方向に中央に */
-        text-align: center;                 /* 親要素に対して中央よせ */
-    }
-    
-    .ScrollScale .contants {                /* ScrollScale内contantsに適用される */      
-        display: none;                      /* 動画が拡大していない場合は非表示 */
-        position: absolute;                 /* ScrollScaleに対する絶対位置に */
-        top: 50vh;                          /* topを調整することによって最初の要素の開始点を下に寄せる */
-        padding-left: 10vh;                 /* 左にpaddingをつけることによって子要素を中央よりに表示 */
-        padding-right: 10vh;
-    }
-    
-    .ScrollScale .contants.active {         /* contantsがactiveになったとき適用される */
-        display: block;                     /* 表示 */
-    }
-    
-    .ScrollScale .contants div.active {     /* contants中のdivがactiveになったとき適用される */                    
-        opacity: 0;                         /* 要素の内容はまだ表示しない */
-    }
-    
-    .ScrollScale .contants div.active.visible {   /* contants中のactiveなdivがvisibleになったとき適用される */
-    }
-    
-    .ScrollScale video {
-        transition: all 500ms 0s ease;      /* 変化にアニメーションを付与 */                /* 変更可能要素 */
-        width: 80%;                         /* 親要素に対して80% */
-        height: 80vh;                       /* 画面に対して80vh */
-        object-fit: cover;                  /* object-fit:cover */                      /* 変更可能要素 */
-    }
-    
-    .ScrollScale video.active {             /* videoがactiveな場合に適用される */
-        position: -webkit-sticky;           /* safari用 */
-        position: sticky;                   /* 動画をstickyコンテナが終了するまで固定 */
-        top: 10vh;                          /* 固定位置はtop=10vh(padding分) */
-        z-index: -1;                        /* z-index=-1 */
-        opacity: 0.9;                       /* opacity変更によって文字を見やすくする */
-    }
 }

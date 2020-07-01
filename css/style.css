@@ -1,5 +1,73 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
 
+#header {
+    background-color: cornflowerblue;
+    text-align: left;
+    padding-left: 20vw;
+    padding-right: 20vh;
+    padding-top: 2vh;
+}
+#header h2 {
+    margin-top: 0;
+    color: cornsilk;
+}
+#header h1 {
+    color: cornsilk;
+    font-size: 40px;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+#header p {
+    font-size: large;
+    color: cornsilk;
+    margin-bottom: 3vh;
+}
+#header button {
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #03A9F4;/*色*/
+    border: solid 1px #0f9ada;/*線色*/
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    font-size: 15px;
+    height: 5vh;
+    font-weight: bold;
+    margin-bottom: 15vh;
+}
+
+.demo {
+    margin-top: 5vh;
+}
+.demo h2 {
+    margin-top: 0;
+    margin-bottom: 10vh;
+}
+.under {
+    background: linear-gradient(transparent 60%, rgb(0, 162, 255) 50%);
+}
+.demo p {
+    margin-bottom: 0;
+}
+
+.usage {
+    margin-top: 5vh;
+    text-align: center;
+}
+.usage h2 {
+    margin-top: 0;
+    margin-bottom: 10vh;
+}
+.usage p {
+    margin-bottom: 0;
+}
+.usage-container{
+    background-color: darkgray;
+}
+
 h2{
     font-size: 30px;
     margin-top: 150px;
@@ -19,11 +87,24 @@ body {
 .ScrollScale .contants span {
     color: aliceblue;
     font-size: 25px;
+    font-family: arial;
+    text-shadow:1px 1px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0),
+    -1px 1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0),
+    0px 1px 0 rgb(0, 0, 0),  0-1px 0 rgb(0, 0, 0),
+    -1px 0 0 rgb(0, 0, 0), 1px 0 0 rgb(0, 0, 0);
+
 }
 
 .ScrollScale .contants h3 {
     color: aliceblue;
+    margin-bottom: 20px;
     font-size: 50px;
+    font-weight: bold;
+    font-family: arial;
+    text-shadow:1px 1px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0),
+    -1px 1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0),
+    0px 1px 0 rgb(0, 0, 0),  0-1px 0 rgb(0, 0, 0),
+    -1px 0 0 rgb(0, 0, 0), 1px 0 0 rgb(0, 0, 0);
 }
 
 .ScrollScale .contants {
@@ -32,34 +113,90 @@ body {
 
 .ScrollScale .contants p {
     color: aliceblue;
+    font-weight: bold;
+    font-family: arial;
+    text-shadow:1px 1px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0),
+    -1px 1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0),
+    0px 1px 0 rgb(0, 0, 0),  0-1px 0 rgb(0, 0, 0),
+    -1px 0 0 rgb(0, 0, 0), 1px 0 0 rgb(0, 0, 0);
 }
 
 .ScrollScale .contants h2 {
     color: aliceblue;
+    font-weight: bold;
+}
+
+.ScrollScale .contants .screen-sencod p span {
+    display: inline-block;
+    margin-bottom: 60px;
+}
+
+.contants a {
+    border: 5px solid transparent;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    border-radius: 40px;
+    padding: 15px 30px;
+    overflow: hidden;
+    width: 200px;
+    text-indent: 23px;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 20px;
+    text-decoration: none;
+    margin: auto;
+}
+
+.footer p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.footer {
+    margin-top: 20vh;
+    width: 100%; 
+    text-align: center;
+    background-color: white;
 }
 
 @media (max-width: 767px) {
+    #header h1 {
+        color: cornsilk;
+        font-size: 20px;
+    }
+    #header button {
+        font-size: 15px;
+    }
+
+    #header p {
+        font-size: 15px;
+    }
+
     h2{
-        font-size: medium;
+        font-size: 20px;
     }
-
+    
     p {
-        font-size: medium;
+        font-size: 15px;
     }
-
-    body {
-        text-align: center;
-        margin:0;
-        padding:0;
-    }
-
+    
     .ScrollScale .contants span {
-        color: aliceblue;
-        font-size: medium;
+        font-size: 20px;
+    }
+    
+    .ScrollScale .contants h3 {
+        font-size: 20px;
     }
 
-    .ScrollScale .contants h3 {
-        color: aliceblue;
-        font-size: medium;
+    .ScrollScale .contants p span {
+        font-size: 15px;
+    }
+    
+    .contants a {
+        font-size: 15px;
+    }
+
+    .footer p {
+        font-size: 20px;
     }
 }
